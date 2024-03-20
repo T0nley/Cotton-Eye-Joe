@@ -8,13 +8,15 @@ public class PlayerHealth : MonoBehaviour
     public float value = 100;
     public RectTransform valueRectTransform;
     private float _maxValue;
+    public GameObject gameplayUI;
+    public GameObject gameOverScreen;
 
     // Start is called before the first frame update
     private void Start()
     {
         _maxValue = value;
         DrawHealthBar();
-
+        gameOverScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,13 +30,24 @@ public class PlayerHealth : MonoBehaviour
         value -= damage;
         if (value <= 0)
         {
-            Destroy(gameObject);
-
+            Death();
 
         }
 
         DrawHealthBar();
     }
+
+    private void Death()
+    {
+        gameplayUI.SetActive(false);
+        gameOverScreen.SetActive(true);
+        GetComponent<PlayerController>().enabled = false;
+        GetComponent<FireballCaster>().enabled = false;
+        GetComponent<CameraRotation>().enabled = false;
+
+    }
+
+
 
     private void DrawHealthBar()
     {
@@ -43,10 +56,12 @@ public class PlayerHealth : MonoBehaviour
     public void AddHealth(float amount)
     {
         value += amount;
-        Mathf.Clamp(value, 0, _maxValue);
+        value = Mathf.Clamp(value, 0, _maxValue);
         DrawHealthBar();
     }
 
+    
+
+
 }
 
-   

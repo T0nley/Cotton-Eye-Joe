@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
 {
 
     public float value = 100;
-
+    
 
 
     // Update is called once per frame
@@ -26,8 +26,8 @@ public class EnemyHealth : MonoBehaviour
         if (value <= 0)
         {
             Destroy(gameObject);
-        }
-
+            
+        }     
     }
 
 
