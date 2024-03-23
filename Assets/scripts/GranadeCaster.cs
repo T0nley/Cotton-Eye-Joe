@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GranadeCaster : MonoBehaviour
 {
+    public float damage = 50;
     public Rigidbody grenadePrefab;
     public Transform grenadeSourceTransform;
 
@@ -22,6 +23,7 @@ public class GranadeCaster : MonoBehaviour
             var granade =  Instantiate(grenadePrefab);
             granade.transform.position = grenadeSourceTransform.position;
             granade.GetComponent<Rigidbody>().AddForce(grenadeSourceTransform.forward * force);
+            granade.GetComponent<Granade>().damage = damage;
         }
     }
 }

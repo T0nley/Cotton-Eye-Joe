@@ -45,7 +45,16 @@ public class PlayerProgress : MonoBehaviour
     {
         _levelValue = value;
 
-        _experienceTagetValue = levels[_levelValue - 1].experieneceForTheNextLevel;
+        var currentLevel = levels[_levelValue - 1];
+        _experienceTagetValue = currentLevel.experieneceForTheNextLevel;
+        GetComponent<FireballCaster>().damage = currentLevel.fireballDamage;
+
+        var granadeCaster = GetComponent<GranadeCaster>();
+        granadeCaster.damage = currentLevel.greanadeDamage;
+        if (currentLevel.greanadeDamage < 0)
+            granadeCaster.enabled = false;
+        else
+            granadeCaster.enabled = true;
     }
     // Update is called once per frame
     private void DrawUI()

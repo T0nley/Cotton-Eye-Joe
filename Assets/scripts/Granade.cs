@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Granade : MonoBehaviour
 {
+    public float damage = 50;
     public float delay = 3;
     public GameObject explosionPrefab;
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class Granade : MonoBehaviour
         Destroy(gameObject);
         var explosion = Instantiate(explosionPrefab);
         explosion.transform.position = transform.position;
+        explosion.GetComponent<Explosion>().damage = damage;
     }
 
 }
